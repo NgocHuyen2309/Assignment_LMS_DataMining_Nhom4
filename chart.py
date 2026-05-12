@@ -13,7 +13,7 @@ def draw_apriori_analysis(csv_path='benchmark_results.csv'):
         print(f"Lỗi: Không tìm thấy file {csv_path}")
         return
 
-    # --- BIỂU ĐỒ 1: HIỆU NĂNG (RUNTIME & RAM) ---
+    # --- BIỂU ĐỒ 2: HIỆU NĂNG (RUNTIME & RAM) ---
     # Mục tiêu: Chứng minh khi min_sup giảm, chi phí tài nguyên tăng phi mã.
     fig1, ax1 = plt.subplots(figsize=(10, 6))
     
@@ -30,7 +30,7 @@ def draw_apriori_analysis(csv_path='benchmark_results.csv'):
     line2, = ax2.plot(df['min_sup'], df['Peak_RAM (MB)'], marker='s', linestyle='--', color=color_ram, label='Bộ nhớ RAM (MB)')
     ax2.tick_params(axis='y', labelcolor=color_ram)
 
-    plt.title('FIG 1: The Relationship Between MIN_SUP, RUNTIME, AND RAM', pad=20, fontweight='bold')
+    plt.title('FIG 2: The Relationship Between MIN_SUP, RUNTIME, AND RAM', pad=20, fontweight='bold')
     
     # Gộp chú thích (Legend)
     lines = [line1, line2]
@@ -39,10 +39,10 @@ def draw_apriori_analysis(csv_path='benchmark_results.csv'):
     
     plt.grid(True, linestyle=':', alpha=0.6)
     plt.tight_layout()
-    plt.savefig('performance_chart.png', dpi=300)
+    plt.savefig('fig 2: performance_chart.png', dpi=300)
     print("Đã tạo xong: performance_chart.png")
 
-    # --- BIỂU ĐỒ 2: BÙNG NỔ TỔ HỢP (CANDIDATE GENERATION) ---
+    # --- BIỂU ĐỒ 1: BÙNG NỔ TỔ HỢP (CANDIDATE GENERATION) ---
     # Mục tiêu: Minh họa trực quan sự tăng vọt của các tập ứng viên C2.
     labels = [f"min_sup {s}" for s in df['min_sup']]
     x = np.arange(len(labels))
@@ -54,7 +54,7 @@ def draw_apriori_analysis(csv_path='benchmark_results.csv'):
     rects3 = ax.bar(x + width, df['Candidate_C3'], width, label='C3 (3-itemsets)', color='#154360')
 
     ax.set_ylabel('Số lượng tập Candidates', fontweight='bold')
-    ax.set_title('FIG 2: Grouped Bar Chart of Candidate Sets', pad=20, fontweight='bold')
+    ax.set_title('FIG 1: Grouped Bar Chart of Candidate Sets', pad=20, fontweight='bold')
     ax.set_xticks(x)
     ax.set_xticklabels(labels)
     ax.legend()
@@ -70,7 +70,7 @@ def draw_apriori_analysis(csv_path='benchmark_results.csv'):
                             ha='center', va='bottom', fontsize=9)
 
     plt.tight_layout()
-    plt.savefig('candidate_explosion_chart.png', dpi=300)
+    plt.savefig('fig 1: candidate_explosion_chart.png', dpi=300)
     print("Đã tạo xong: candidate_explosion_chart.png")
 
 if __name__ == "__main__":
